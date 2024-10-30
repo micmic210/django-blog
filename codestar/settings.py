@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import dj_database_url
+from urllib.parse import urlparse
 
 # 環境変数ファイルの読み込み
 if os.path.isfile('env.py'):
@@ -13,7 +14,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = False
 
-ALLOWED_HOSTS = ['8000-micmic210-djangoblog-sqmy2eut80q.ws-eu116.gitpod.io', '.herokuapp.com']
+ALLOWED_HOSTS = ['.herokuapp.com']
+
+gitpod_url = os.getenv('GITPOD_WORKSPACE_URL')
+if gitpod_url:
+    # ポート番号を含めてホスト名を追加
+    hostname = urlparse(gitpod_url).hostname
+    ALLOWED_HOSTS.append(f"8080-{hostname}")
+    ALLOWED_HOSTS.append(f"8000-{hostname}")
+    ALLOWED_HOSTS.append(hostname)
+
+print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
 
 # アプリケーションの設定
 INSTALLED_APPS = [
