@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 環境変数から重要な設定を取得
 SECRET_KEY = os.environ.get("SECRET_KEY")
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.herokuapp.com']
 
