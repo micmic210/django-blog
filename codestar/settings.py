@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 環境変数から重要な設定を取得
 SECRET_KEY = os.environ.get("SECRET_KEY")
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.herokuapp.com']
 
@@ -80,6 +80,14 @@ CSRF_TRUSTED_ORIGINS = [
     "https://*.herokuapp.com"
 ]
 
+# GitpodのURLを追加
+gitpod_url = os.getenv('GITPOD_WORKSPACE_URL')
+if gitpod_url:
+    hostname = urlparse(gitpod_url).hostname
+    CSRF_TRUSTED_ORIGINS.append(f"https://{hostname}")
+    CSRF_TRUSTED_ORIGINS.append(f"https://8000-{hostname}")
+    CSRF_TRUSTED_ORIGINS.append(f"https://8080-{hostname}")
+    
 # パスワードのバリデーション
 AUTH_PASSWORD_VALIDATORS = [
     {
