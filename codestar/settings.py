@@ -13,7 +13,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 # 環境変数から重要な設定を取得
 SECRET_KEY = os.environ.get("SECRET_KEY")
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.herokuapp.com']
 
